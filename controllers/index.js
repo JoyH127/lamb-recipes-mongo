@@ -1,4 +1,38 @@
 const Lamb = require("../models/lamb");
+const Country = require("../models/country");
+
+const createCountry = async (req, res) => {
+  try {
+    const countries = await new Country(req.body);
+    await countries.save();
+    return res.status(201).json({
+      countries,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+const getAllCountry = async (req, res) => {
+  try {
+    const country = await Country.find();
+    return res.status(200).json({ country });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+const getCountryById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const country = await Country.findById(id);
+    if (country) {
+      return res.status(200).json({ country });
+    }
+    return res.status(404).send("country not found");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
 
 const createLamb = async (req, res) => {
   try {
@@ -68,5 +102,8 @@ module.exports = {
   getAllRecipe,
   getLambById,
   updateLamb,
+  createCountry,
+  getAllCountry,
+  getCountryById,
   deleteLamb,
 };

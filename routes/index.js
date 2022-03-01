@@ -10,5 +10,10 @@ router.post("/lambs", controllers.createLamb);
 router.get("/lambs", controllers.getAllRecipe);
 router.get("/lambs/:id", controllers.getLambById);
 router.put("/lambs/:id", controllers.updateLamb);
-router.delete("/lambs:id", controllers.deleteLamb);
+router.delete("/lambs/:id", controllers.deleteLamb);
+
+router.post("/country", controllers.createCountry);
+router.get("/country", controllers.getAllCountry);
+router.get("/country/:id", controllers.getCountryById);
+
 module.exports = router;
